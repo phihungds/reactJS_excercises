@@ -7,14 +7,15 @@
     <title>Document</title>
 </head>
 <body>
+    <button id="btn" onclick="">Click</button>
+
+    <input type="text" >
     <script>
-        var time = new Date()
-        var hour = time.getHours()
-        var minutes = time.getMinutes()
-        var date = time.getDate()
-        var month = time
-        var days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
-        console.log(time.getMonth())
+        var input = document.querySelector('input')
+
+        input.onchange = function (e) {
+            console.log(e)
+        }
     </script>
 </body>
 </html>
