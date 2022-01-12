@@ -1,17 +1,17 @@
 import {useState, useEffect} from 'react';
 
-function Clock() {
+function useTime() {
     const [time, setTime] = useState('')
     const [day, setDay] = useState('')
     
     const updateTime = () => {
-        let date = new Date()
+        let date = new Date()   
 
         let hours = date.getHours() < 10 ? 
-        parseInt('0' + date.getHours()) : date.getHours()
+        '0' + date.getHours() : date.getHours()
 
         let minutes = date.getMinutes() < 10 ?
-        parseInt('0' + date.getMinutes()) : date.getMinutes()
+        '0' + date.getMinutes() : date.getMinutes()
 
         let seconds = date.getSeconds() < 10 ?
         '0' + date.getSeconds() : date.getSeconds()
@@ -27,21 +27,29 @@ function Clock() {
 
         setDay(`${toDay}, ${dateNum} ${month} ${year}`)
         }
-        setInterval(function () {
-            updateTime();
-        }, 1000);
+        
+        useEffect( () => {
+            const clock = setInterval(function () {
+                updateTime();
+            }, 1000);
+            return () => {
+                clearInterval(clock)
+            }
+        }, [])
+        
+
+        
+
+
+    return [time, day]
+        // <div style={{textAlign:'center'}}>
+        //     <div>
+        //         <h1>What time is it ?</h1>
+        //         <h2>{day}</h2>
+        //         <h2>{time}</h2>
+        //     </div>
+        // </div>
 
     
-
-
-    return (
-        <div style={{textAlign:'center'}}>
-            <div>
-                <h1>What time is it ?</h1>
-                <h2>{day}</h2>
-                <h2>{time}</h2>
-            </div>
-        </div>
-    )
 }
-export default Clock
+export default useTime

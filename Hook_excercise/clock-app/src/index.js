@@ -1,9 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
 import reportWebVitals from './reportWebVitals';
-import Clock from './useClock';
+import Clock from './Clock';
 
 ReactDOM.render(
   <React.StrictMode>
