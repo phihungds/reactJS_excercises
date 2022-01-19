@@ -36,12 +36,3 @@
     transform: rotate(360deg);
   }
 }
-
-label {
-  display: block;
-  font-weight: 700;
-}
-.error {
-  font-weight: 600;
-  color: red;
-}
