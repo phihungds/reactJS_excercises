@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom"
+import { useLocation, useNavigate } from "react-router-dom"
 
 const employees = [
     {
@@ -20,12 +20,17 @@ const employees = [
 
 function Employees () {
     let navigate = useNavigate()
+    let {state} = useLocation()
     const goToDetail = (e) => {
-        let emindex = e.target.value
-        navigate('/employee-detail', {state: employees[emindex]})
+        let emIndex = e.target.value
+        navigate('/employee-detail', {state: employees[emIndex]})
+    }
+    const back = () => {
+        navigate(-1)
     }
     return (
         <>
+        <h2>Welcome {state.email}</h2>
         <table>
             <thead>
                 <th>Employee ID</th>
@@ -42,7 +47,9 @@ function Employees () {
                     </tr>
                 ))}
             </tbody>
-        </table></>
+        </table>
+        <button onClick={back}>Đăng xuất</button>
+        </>
     )
 }
 
