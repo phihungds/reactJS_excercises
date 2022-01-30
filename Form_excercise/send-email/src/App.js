@@ -1,7 +1,8 @@
 import React, {useState} from 'react'
 import {Formik} from 'formik'
 import './App.css';
-import 'bootstrap/dist/css/bootstrap.min.css'
+import 'bootstrap/dist/css/bootstrap.min.css';
+import TextField from '@mui/material/TextField';
 
 export default function App() {
   const regex = {
@@ -46,18 +47,18 @@ export default function App() {
        {({values, errors, handleSubmit}) => (
          <form onSubmit={handleSubmit}>
            <div className='mb-3 col-sm-6'>
-             <label className='form-label'>To</label>
-             <input className='form-control' placeholder='Email address' name='email' onChange={handleChange} />
+             
+             <TextField id="email" label="Send to" variant="outlined" onChange={handleChange} name='email' fullWidth />
              <p className='error'>{errors.email}</p>
            </div>
            <div className='mb-3 col-sm-6'>
-             <label className='form-label'>Title</label>
-             <input className='form-control' placeholder='Title' name='title' onChange={handleChange} />
+             
+           <TextField id="title" label="Title" variant="outlined" onChange={handleChange} name='title' fullWidth />
              <p className='error'>{errors.title}</p>
            </div>
            <div className='mb-3 col-sm-6'>
-             <label className='form-label'>Message:</label>
-             <textarea className='form-control row-sm-3' placeholder='Your message...' name='message' onChange={handleChange} />
+           <TextField id="fullWidth" label="Message"  variant="outlined" onChange={handleChange} name='message' multiline rows={4} fullWidth/>
+             
              <p className='error'>{errors.message}</p>
            </div>
            <div className='mb-3 col-sm-6'>
