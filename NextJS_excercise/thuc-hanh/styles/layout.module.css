@@ -1,0 +1,16 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins');
+
+.menu {
+    margin: auto;
+    background-color: #56baed;
+    display: flex;
+}
+.menuItem {
+    float: left;
+    list-style-type: none;
+    padding: 10px;
+    font-weight: 600;
+}
+.menuItem:hover {
+    color: wheat;
+}
