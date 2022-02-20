@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from 'react-router-dom'
 import axios from 'axios'
+import 'bootstrap/dist/css/bootstrap.min.css'
 
 export default function UserDetails() {
     const { userId } = useParams()
@@ -32,22 +33,22 @@ export default function UserDetails() {
     }
 
     return (
-        <div>
+        <div className="container">
             <h1>User details</h1>
-            <form>
-                <div>
+            <form className="form-row">
+                <div className="form-group col-md-6">
                     <label>Id</label>
-                    <input name="id" value={user.id || ''} onChange={handleChange} />
+                    <input className="form-control" name="id" value={user.id || ''} onChange={handleChange} />
                 </div>
-                <div>
+                <div className="form-group col-md-6">
                     <label>Name</label>
-                    <input name="name" value={user.name || ''} onChange={handleChange} />
+                    <input className="form-control" name="name" value={user.name || ''} onChange={handleChange} />
                 </div>
-                <div>
+                <div className="form-group col-md-6">
                     <label>Birthday</label>
-                    <input type="date" name="birthday" value={user.birthday || ''} onChange={handleChange} />
+                    <input className="form-control" type="date" name="birthday" value={user.birthday || ''} onChange={handleChange} />
                 </div>
-                <button type="button" onClick={handleSubmit} >Submit</button>
+                <button className="btn btn-success" type="button" onClick={handleSubmit} >Submit</button>
             </form>
         </div>
     )
