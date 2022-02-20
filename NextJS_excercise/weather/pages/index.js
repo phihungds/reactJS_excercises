@@ -4,11 +4,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useState } from 'react'
 
 
+
 export async function getStaticProps() {
     const api_key = 'c66361ea6655b28bed44236606ccb99a'
     let url = 'https://api.openweathermap.org/data/2.5/weather'
     url += '?q=' + 'Haiphong' + '&appid' + api_key
-    const response = await axios.get()
+    const response = await axios.get('https://api.openweathermap.org/data/2.5/weather?q=haiphong&appid=c66361ea6655b28bed44236606ccb99a')
     //'https://api.openweathermap.org/data/2.5/weather?q=haiphong&appid=c66361ea6655b28bed44236606ccb99a'
     return {
         props: {
@@ -48,7 +49,7 @@ export default function Home({ weatherInfo }) {
             </div> */}
 
             <div>
-            <h2><FontAwesomeIcon icon='fa-temperature-high'/>Temp:  {weatherInfo.main.temp -273.1}</h2> 
+            <h2><FontAwesomeIcon icon={["far", "coffee"]}/>Temp:  {weatherInfo.main.temp -273.1}</h2> 
             </div>
         </div>
 
