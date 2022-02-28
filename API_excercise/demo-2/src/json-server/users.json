@@ -7,7 +7,7 @@
     },
     {
       "id": 2,
-      "address": "New York",
+      "address": "Chicago",
       "name": "Jennie"
     },
     {
@@ -24,11 +24,6 @@
       "id": 5,
       "address": "New York",
       "name": "Ben"
-    },
-    {
-      "id": "6",
-      "name": "Dâu nóc nhà",
-      "address": "Hải Phòng"
     }
   ]
 }

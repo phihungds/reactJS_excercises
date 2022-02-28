@@ -5,16 +5,29 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 class Users extends Component {
     constructor(props) {
         super(props);
-        this.state = { users: [] };
+        this.state = { users: [], loading: false };
     }
     componentDidMount() {
-        axios.get('http://localhost:3001/users')
-            .then((res) => {
-                console.log(this)
-                this.setState({ users: res.data })
-            })
-            .catch((err) => { console.log(err) })
+        this.setState({loading:true}) 
+        this.getUsers()
+      .then((res) => { this.setState({ users: res.data }) })
+      .catch((err) => { throw err })
+      .finally(() => { this.setState({loading: false}) })
+        // axios.get('http://localhost:3001/users')
+        //     .then((res) => {
+        //         this.setState({ users: res.data})
+        //     })
+        //     .catch((err) => { console.log(err) })
     }
+    getUsers = () => {
+        return new Promise((resolve, reject) => {
+          setTimeout(() => {
+            axios.get('http://localhost:3001/users')
+              .then((res) => { resolve(res) })
+              .catch((err) => { reject(err) })
+          }, 1000);
+        })
+      }
 
     handleCreate = () => {
         window.location.href = '/user/add'
@@ -22,11 +35,15 @@ class Users extends Component {
    handleDelete =(e) => {
     
     axios.delete(`http://localhost:3001/users/${e.target.id}`)
-        
+    .then((res) => {
+        // this.setState({ users: res.data})
+    })
+    .catch((err) => {console.log(err)})
     }
 
     render() {
-        const { users } = this.state;
+        const { users, loading } = this.state;
+        if (loading) return (<h3 className='loading'>Loading users...</h3>)
         return (
             <div className='user-detail container pt-5'>
                 <table className='table table-striped table-hover'>
