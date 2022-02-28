@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, useEffect } from 'react';
 import axios from 'axios'
 import 'bootstrap/dist/css/bootstrap.min.css'
 
@@ -8,7 +8,7 @@ class Users extends Component {
         this.state = { users: [] };
     }
     componentDidMount() {
-        axios.get('http://localhost:3001/api/user/list')
+        axios.get('http://localhost:3001/users')
             .then((res) => {
                 console.log(this)
                 this.setState({ users: res.data })
@@ -18,6 +18,11 @@ class Users extends Component {
 
     handleCreate = () => {
         window.location.href = '/user/add'
+    }
+   handleDelete =(e) => {
+    
+    axios.delete(`http://localhost:3001/users/${e.target.id}`)
+        
     }
 
     render() {
@@ -29,6 +34,7 @@ class Users extends Component {
                         <tr>
                             <th>STT</th>
                             <th>Họ và tên</th>
+                            <th>Địa chỉ</th>
                             <th>Hành động</th>
                         </tr>
                     </thead>
@@ -38,7 +44,9 @@ class Users extends Component {
                                 <tr key={user.id}>
                                     <td>{user.id}</td>
                                     <td>{user.name}</td>
-                                    <td><a href={`/user/${user.id}`}><button className='btn btn-success'>Edit</button></a></td>
+                                    <td>{user.address}</td>
+                                    <td><a href={`/user/${user.id}`}><button className='btn btn-success' >Edit</button></a><button className='btn btn-danger' id={user.id} onClick={this.handleDelete}>Delete</button></td>
+                                    
                                 </tr>
                             ))
                         }

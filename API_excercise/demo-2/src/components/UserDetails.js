@@ -2,15 +2,17 @@ import React, { useEffect, useState } from "react";
 import { useParams } from 'react-router-dom'
 import axios from 'axios'
 import 'bootstrap/dist/css/bootstrap.min.css'
+import { useNavigate } from "react-router-dom";
 
 export default function UserDetails() {
     const { userId } = useParams()
     const isCreate = !userId
     const [user, setUser] = useState({})
+    const navigate = useNavigate()
 
     useEffect(() => {
         if (userId) {
-            axios.get(`http://localhost:3001/api/user/details/${userId}`)
+            axios.get(`http://localhost:3001/users/${userId}`)
                 .then((res) => {
                     setUser(res.data)
                 })
@@ -26,11 +28,21 @@ export default function UserDetails() {
     }
     function handleSubmit(e) {
         e.preventDefault()
-        axios.post('http://localhost:3001/api/user', user)
+       if (isCreate) {
+        axios.post('http://localhost:3001/users', user)
             .then((res) => {
                 alert(`${isCreate ? 'Create' : 'Edit'} user success`)
             })
+        }
+        else {
+            axios.put(`http://localhost:3001/users/${userId}`, user)
+            .then((res) => {
+                alert(`${isCreate ? 'Create' : 'Edit'} user success`)
+            })
+        }
+        navigate('/')
     }
+    
 
     return (
         <div className="container">
@@ -45,10 +57,10 @@ export default function UserDetails() {
                     <input className="form-control" name="name" value={user.name || ''} onChange={handleChange} />
                 </div>
                 <div className="form-group col-md-6">
-                    <label>Birthday</label>
-                    <input className="form-control" type="date" name="birthday" value={user.birthday || ''} onChange={handleChange} />
+                    <label>Address</label>
+                    <input className="form-control" type="text" name="address" value={user.address || ''} onChange={handleChange} />
                 </div>
-                <button className="btn btn-success" type="button" onClick={handleSubmit} >Submit</button>
+                <button className="btn btn-success" type="button" onClick={handleSubmit} >{isCreate ? 'Create' : 'Edit'}</button>
             </form>
         </div>
     )
